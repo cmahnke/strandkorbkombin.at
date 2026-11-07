@@ -1,0 +1,12 @@
+baseURL = 'https://strandkorbkombin.at/'
+locale = 'de-DE'
+defaultContentLanguage = 'de'
+title = 'Strandkorb-Kombinat'
+theme = 'projektemacher-base'
+
+[params.css]
+  dedupe = false
+
+[markup.goldmark.renderer]
+  unsafe = true
+
