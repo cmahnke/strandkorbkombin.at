@@ -4,7 +4,6 @@
     "@maplibre/maplibre-gl-style-spec": "^26.5.0",
     "@pagefind/modular-ui": "1.5.2",
     "@projektemacher/code-citation-lint": "^0.1.1",
-    "@projektemacher/coursereader": "github:cmahnke/coursereader",
     "@projektemacher/hdr-canvas": "^0.4.0",
     "@projektemacher/lucienne": "^0.2.1",
     "@projektemacher/tify-plugin-annotorious": "^0.2.2",
@@ -36,7 +35,8 @@
     "three": "^0.187.0",
     "tify": "^0.36.2",
     "vis-timeline": "8.5.6",
-    "yargs": "^18.2.0"
+    "yargs": "^18.2.0",
+    "@projektemacher/coursereader": "github:cmahnke/coursereader"
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
@@ -96,7 +96,6 @@
     "xslt3": "^2.7.0"
   },
   "scripts": {
-    "postinstall": "if [ -d node_modules/@projektemacher/coursereader ] && [ ! -d node_modules/@projektemacher/coursereader/dist ]; then npm --prefix node_modules/@projektemacher/coursereader run build; fi",
     "lint-scss": "stylelint 'assets/scss/**/*.scss'",
     "lint-md": "markdownlint 'Upgrade.md' 'exampleSite/content/**/*.md'",
     "lint-js": "eslint 'assets/js' 'assets/ts'",
@@ -113,7 +112,8 @@
     "validate-gjson-bsd": "find docs -name '*.gjson' -o -name '*.geojson' -print0 | xargs -0 -n1 npx eslint -c themes/projektemacher-base/eslint.config.mjs",
     "validate-iiif": "case $OSTYPE in darwin*) npm run validate-iiif-bsd ;; linux*) npm run validate-iiif-gnu ;; bsd*) npm run validate-iiif-bsd ;; *)  exit 100 ;; esac",
     "validate-gjson": "case $OSTYPE in darwin*) npm run validate-gjson-bsd ;; linux*) npm run validate-gjson-gnu ;; bsd*) npm run validate-gjson-bsd ;; *)  exit 100 ;; esac",
-    "validate": "npm run validate-iiif && npm run validate-gjson"
+    "validate": "npm run validate-iiif && npm run validate-gjson",
+    "postinstall": "bash scripts/build-coursereader.sh"
   },
   "overrides": {
     "canvas": "npm:dry-uninstall"
