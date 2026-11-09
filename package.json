@@ -96,6 +96,7 @@
     "xslt3": "^2.7.0"
   },
   "scripts": {
+    "postinstall": "if [ -d node_modules/@projektemacher/coursereader ] && [ ! -d node_modules/@projektemacher/coursereader/dist ]; then npm --prefix node_modules/@projektemacher/coursereader run build; fi",
     "lint-scss": "stylelint 'assets/scss/**/*.scss'",
     "lint-md": "markdownlint 'Upgrade.md' 'exampleSite/content/**/*.md'",
     "lint-js": "eslint 'assets/js' 'assets/ts'",
