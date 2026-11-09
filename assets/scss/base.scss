@@ -1,5 +1,8 @@
 @use "functions/color" as *;
 @use "coder/site-shared" as shared;
+@use "normalize";
+@use "npm-fonts/lato";
+@use "npm-fonts/lora";
 @use "fonts/futura-renner";
 @use "coder/base";
 @use "coder/content";

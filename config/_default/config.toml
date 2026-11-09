@@ -1,0 +1,10 @@
+[params]
+  copyrightYears = "MMXXVI"
+  enableBlogPost = true
+  enableTOC = true
+  favicon_svg = "/images/cm.svg"
+  description = "Feinster AI Slop"
+  wikidata = false
+  debug = true
+  headerimage = false
+  schemaPerson = "https://christianmahnke.de/person.jsonld"

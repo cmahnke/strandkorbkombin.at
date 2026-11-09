@@ -1,0 +1,28 @@
+package.json
+.npmrc
+patches
+public
+docs
+node_modules/
+resources
+.hugo_build.lock
+hugo_stats.json
+**/.DS_Store
+assets/scss/npm-fonts
+assets/css/fonts/
+static/fonts/
+static/map-styles/
+assets/scss/flags/
+static/images/favicon*
+static/images/apple-touch-icon.png
+static/images/cm.svg
+/package-lock.json
+/npm-shrinkwrap.json
+/pnpm-lock.yaml
+/yarn.lock
+
+# Coursepack (unignore manifests, ignore build output)
+!Source File/Mocks/coursepack/package.json
+!Source File/Mocks/coursepack/demo/package.json
+Source File/Mocks/coursepack/dist/
+Source File/Mocks/coursepack/demo/dist/

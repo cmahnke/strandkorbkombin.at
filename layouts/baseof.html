@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="{{ site.Language.Lang }}">
+<head>
+    <meta charset="utf-8">
+    {{- partial "html/head/title.html" . -}}
+    <meta name="robots" content="all,follow">
+    <meta name="googlebot" content="index,follow,snippet,archive">
+    {{- partial "html/head/meta.html" . -}}
+    {{- partial "html/head/links.html" . -}}
+    {{- partial "html/head/style.html" (dict "context" . "css" "css/style.css") -}}
+    {{- partial "html/head/script.html" (dict "context" . "js" (partial "html/head/iiif-js.html" .)) -}}
+</head>
+{{- $book := and (eq .Params.layout "book") (eq .Params.bookLeaves "self") -}}
+{{ block "body" . }}
+    {{- $class := "" -}}
+    {{- if and (eq .Params.layout "book") (eq .Params.bookLeaves "self") -}}
+        {{- $class = "book-page" -}}
+    {{- end -}}
+    {{- with .Page.File -}}
+      {{- if hasPrefix .Path "about" -}}
+          {{- $class = printf "%s about" $class -}}
+      {{- end -}}
+    {{- end -}}
+    {{- if .Params.metaPage -}}
+        {{- $class = printf "%s %s" $class "meta" -}}
+    {{ end }}
+    <body class="home blog {{ $class }}">
+    <a class="skip-link" href="#main">{{ i18n "skipToContent" }}</a>
+{{ end }}
+
+{{- if $book }}
+    <div class="book-reader" id="book-{{ md5 .RelPermalink }}">
+      <div class="book-leaf" id="book-leaf-0">
+{{- end }}
+
+    <header id="site-header" class="site-header">
+      <div class='top-navigation'>
+        {{ partial "topnavigation.html" . }}
+      </div>
+
+      <div class="container">
+        {{ partial "header.html" . }}
+      </div>
+    </header>
+
+    <main id="main" class="main">
+
+      {{ block "main" . }}
+      {{ end }}
+      {{ block "content" . }}
+      {{ end }}
+    </main>
+
+    {{ partial "footer.html" . }}
+
+{{- if $book }}
+      </div>
+    </div>
+    <script type="text/javascript">
+      window.addEventListener('DOMContentLoaded', (event) => {
+        window.bookViewer('#book-{{ md5 .RelPermalink }}', {
+          pages: ['#book-leaf-0'],
+          preset: {{ .Params.preset | default "book-photo" | jsonify }},
+          seed: {{ .Params.seed | default "strandkorb-buch" | jsonify }},
+          layouts: [
+            {
+              query: '(max-width: 767px)',
+              mode: 'single',
+              pageFit: 'width',
+              gutter: false,
+              background: {{ .Params.viewerBackground | default "#221d18" | jsonify }}
+            },
+            {
+              query: '(min-width: 768px)',
+              mode: 'spread',
+              pageFit: 'contain',
+              gap: 0,
+              gutter: 'deep-bound-volume',
+              background: {{ .Params.viewerBackground | default "#221d18" | jsonify }},
+              spread: { firstPageSide: 'right' }
+            }
+          ]
+        });
+      });
+    </script>
+{{- end }}
+
+</body>
+</html>

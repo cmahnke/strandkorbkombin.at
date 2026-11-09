@@ -71,3 +71,48 @@ $book-spine: #3a332b;
   color: rgba($book-ink, 0.85);
   padding-left: 1em;
 }
+
+// Full-page mode: the reader covers the whole page
+body.book-page {
+  margin: 0;
+  padding: 0;
+
+  .book-reader {
+    max-width: none;
+    min-height: 100vh;
+    padding: 1rem 0.5rem;
+    width: 100%;
+  }
+
+  .main {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+// Header and footer are part of the displayed page:
+// blend the site chrome into the paper tone
+.book-reader .book-leaf .site-header {
+  background: transparent;
+  color: inherit;
+  font-family: inherit;
+  position: static;
+}
+
+.book-reader .book-leaf .footer {
+  background: transparent;
+  color: inherit;
+  font-family: inherit;
+}
+
+// The drop cap also applies when main wraps the content
+.book-reader .book-leaf .main > p:first-of-type::first-letter {
+  color: #4a1f14;
+  float: left;
+  font-family: "Futura Renner", Lora, Georgia, serif;
+  font-size: 3.4em;
+  font-weight: 600;
+  line-height: 0.8;
+  padding-right: 0.12em;
+  padding-top: 0.06em;
+}

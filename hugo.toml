@@ -3,10 +3,20 @@ locale = 'de-DE'
 defaultContentLanguage = 'de'
 title = 'Strandkorb-Kombinat'
 theme = 'projektemacher-base'
-
-[params.css]
-  dedupe = false
+publishDir = 'docs'
 
 [markup.goldmark.renderer]
   unsafe = true
+
+[outputs]
+  home = ['html', 'rss']
+  section = ['html', 'rss']
+  taxonomy = ['html', 'rss']
+  term = ['html', 'rss']
+
+[params.webmentions]
+  # Webmention/pingback endpoint (collected by the projektemacher webmention
+  # service). Received mentions live in 'data/webmentions/mentions.json'
+  endpoint = 'https://static.projektemacher.org/services/webmentions/webmention.php'
+  advertisePingback = true
 
