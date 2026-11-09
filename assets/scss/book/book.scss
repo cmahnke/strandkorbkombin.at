@@ -1,0 +1,73 @@
+// Book-inspired theme for the coursereader viewer.
+$book-paper: #f4ecd9;
+$book-ink: #2c2620;
+$book-spine: #3a332b;
+
+.book-reader {
+  background: #221d18;
+  margin: 0 auto;
+  max-width: 75rem;
+  overflow: hidden;
+  padding: 2.5rem 0.5rem;
+  position: relative;
+}
+
+// The original (pre-effect) leaf content keeps the page look
+// if the script fails or has not run yet
+.book-reader .book-leaf {
+  background:
+    linear-gradient(
+      90deg,
+      rgb(58 51 43 / 0.35),
+      transparent 2.5%,
+      transparent 96%,
+      rgb(58 51 43 / 0.2)
+    ),
+    $book-paper;
+  box-shadow: 0 0 1.5rem rgb(0 0 0 / 0.55);
+  color: $book-ink;
+  font-family: Lora, Georgia, "Times New Roman", serif;
+  font-size: 1rem;
+  line-height: 1.7;
+  margin: 0 auto;
+  max-width: 38rem;
+  padding: 4rem 3.5rem;
+}
+
+.book-reader h1,
+.book-reader h2,
+.book-reader h3 {
+  font-family: "Futura Renner", Lora, Georgia, serif;
+  hyphens: auto;
+  letter-spacing: 0.02em;
+  margin-top: 0;
+}
+
+// Wide first letter of the first paragraph
+.book-reader .book-leaf > p:first-of-type::first-letter {
+  color: #4a1f14;
+  float: left;
+  font-family: "Futura Renner", Lora, Georgia, serif;
+  font-size: 3.4em;
+  font-weight: 600;
+  line-height: 0.8;
+  padding-right: 0.12em;
+  padding-top: 0.06em;
+}
+
+.book-reader p {
+  hyphens: auto;
+  margin: 0 0 1.1em;
+  text-align: justify;
+}
+
+.book-reader figure,
+.book-reader blockquote {
+  margin: 1.5em 0;
+}
+
+.book-reader blockquote {
+  border-left: 3px solid rgba($book-spine, 0.5);
+  color: rgba($book-ink, 0.85);
+  padding-left: 1em;
+}

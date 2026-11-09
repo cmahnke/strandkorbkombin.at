@@ -1,0 +1,48 @@
+{{ define "title" }}
+  {{ .Title }} - {{ site.Title }}
+{{ end }}
+{{ define "content" }}
+  {{- $preset := .Params.preset | default "book-photo" -}}
+  {{- $seed := .Params.seed | default "strandkorb-buch" -}}
+  {{- $bg := .Params.viewerBackground | default "#221d18" -}}
+  {{- $id := printf "book-%s" (md5 .RelPermalink) -}}
+  {{- $leaves := slice -}}
+  <div class="book-reader" id="{{ $id }}">
+    {{- range $i, $page := .Pages }}
+      <div class="book-leaf" id="book-leaf-{{ $i }}">{{ $page.Content }}</div>
+      {{- $leaves = $leaves | append (printf "#book-leaf-%d" $i) -}}
+    {{- end }}
+    {{- if not $leaves }}
+      <div class="book-leaf" id="book-leaf-0">{{ .Content }}</div>
+      {{- $leaves = $leaves | append "#book-leaf-0" -}}
+    {{- end }}
+  </div>
+  <script type="text/javascript">
+    window.addEventListener('DOMContentLoaded', (event) => {
+      var target = document.getElementById('{{ $id }}');
+      window.bookViewer(target, {
+        pages: {{ $leaves | jsonify }},
+        preset: {{ $preset | jsonify }},
+        seed: {{ $seed | jsonify }},
+        layouts: [
+          {
+            query: '(max-width: 767px)',
+            mode: 'single',
+            pageFit: 'width',
+            gutter: false,
+            background: {{ $bg | jsonify }}
+          },
+          {
+            query: '(min-width: 768px)',
+            mode: 'spread',
+            pageFit: 'contain',
+            gap: 0,
+            gutter: 'deep-bound-volume',
+            background: {{ $bg | jsonify }},
+            spread: { firstPageSide: 'right' }
+          }
+        ]
+      });
+    });
+  </script>
+{{ end }}
