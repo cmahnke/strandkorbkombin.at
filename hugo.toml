@@ -4,6 +4,7 @@ defaultContentLanguage = 'de'
 title = 'Strandkorb-Kombinat'
 theme = 'projektemacher-base'
 publishDir = 'docs'
+enableRobotsTXT = true
 
 [markup.goldmark.renderer]
   unsafe = true

@@ -2,6 +2,7 @@
 title: Strandkorb-Kombinat
 layout: book
 bookLeaves: self
+preset: strandkorb
 seed: strandkorb-start
 js:
   - ts/book/book.ts

@@ -1,0 +1,54 @@
+{
+  "paper": {
+    "tone": 1,
+    "texture": 0.07
+  },
+  "exposure": {
+    "brightness": 1.02,
+    "contrast": 1.9,
+    "gamma": 0.9,
+    "unevenness": 0.22,
+    "blownHighlights": 0.34,
+    "crushedShadows": 0.58
+  },
+  "ink": {
+    "spread": 0.28,
+    "erosion": 0.09,
+    "blur": 0.025
+  },
+  "tone": {
+    "mode": "bitonal",
+    "levels": 2,
+    "threshold": 0.64,
+    "dither": "random",
+    "ditherAmount": 0.34
+  },
+  "artifacts": {
+    "grain": 0.58,
+    "dust": 0.2,
+    "scratches": 0.12,
+    "bleedThrough": 0.025,
+    "shineThrough": 0.3,
+    "verticalStreaks": 0.07,
+    "horizontalBands": 0.035,
+    "edgeNoise": 0.46
+  },
+  "capture": {
+    "grayscale": true,
+    "rotation": 0,
+    "perspective": 0,
+    "rotationJitter": 0
+  },
+  "border": {
+    "enabled": true,
+    "darkness": 1,
+    "thickness": 20,
+    "roughness": 0.86,
+    "sides": {
+      "top": true,
+      "right": false,
+      "bottom": true,
+      "left": true
+    }
+  }
+}

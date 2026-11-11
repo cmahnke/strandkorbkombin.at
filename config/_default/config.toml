@@ -3,8 +3,17 @@
   enableBlogPost = true
   enableTOC = true
   favicon_svg = "/images/cm.svg"
-  description = "Feinster AI Slop"
+  description = "Experimente zu hybriden Medien"
   wikidata = false
   debug = true
   headerimage = false
   schemaPerson = "https://christianmahnke.de/person.jsonld"
+
+[params.author]
+  name = 'Christian Mahnke'
+  email = 'mail@christianmahnke.de'
+  uri = 'https://christianmahnke.de/'
+  orcid = '0009-0003-1361-4159'
+
+[params.robots]
+  llmsTXT = true

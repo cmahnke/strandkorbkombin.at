@@ -1,0 +1,65 @@
+# {{ site.Title }}
+
+> {{ site.Params.description }}
+
+{{- $authorName := "" }}
+{{- with site.Params.author }}
+  {{- if reflect.IsMap . }}
+    {{- with .name }}{{ $authorName = . }}{{ end }}
+  {{- else }}
+    {{- $authorName = . }}
+  {{- end }}
+{{- end }}
+{{- $orcid := "" }}
+{{- if reflect.IsMap site.Params.author }}
+  {{- $orcid = site.Params.author.orcid | default "" }}
+{{- end }}
+{{- if not $orcid }}{{ $orcid = site.Params.orcid | default "" }}{{ end }}
+{{- $authorLine := "" }}
+{{- if $authorName }}
+  {{- $authorLine = printf "Author: %s" $authorName }}
+    {{- with $orcid }}{{ $authorLine = printf "%s — ORCID: https://orcid.org/%s" $authorLine . }}{{ end }}
+{{- else }}
+  {{- if $orcid }}{{ $authorLine = printf "Author: ORCID: https://orcid.org/%s" $orcid }}{{ end }}
+{{- end }}
+{{- with $authorLine }}
+
+{{ $authorLine }}
+{{- end }}
+
+## Pages
+
+{{- $home := . }}
+{{- range site.Pages }}
+  {{- if not .IsHome }}{{ continue }}{{ end }}
+  {{- with .OutputFormats.Get "html" }}
+- [{{ site.Title }}]({{ .Permalink }}){{ with $home.Description }}: {{ . }}{{ else }}: {{ site.Params.description }}{{ end }}
+  {{- end }}
+{{- end }}
+{{- range site.RegularPages }}
+  {{- if .Params.robotsdisallow }}{{ continue }}{{ end }}
+  {{- if .Params.sitemap_exclude }}{{ continue }}{{ end }}
+  {{- if .Sitemap.Disable }}{{ continue }}{{ end }}
+  {{- if isset .Params "news" }}{{ if not .Params.news }}{{ continue }}{{ end }}{{ end }}
+  {{- if isset .Params "archive" }}{{ if not .Params.archive }}{{ continue }}{{ end }}{{ end }}
+  {{- with .OutputFormats.Get "html" }}
+- [{{ .Title }}]({{ .Permalink }}){{ with .Description }}: {{ . }}{{ end }}
+  {{- end }}
+{{- end }}
+{{- $sections := slice }}
+{{- range site.Sections }}
+  {{- if .Params.robotsdisallow }}{{ continue }}{{ end }}
+  {{- if .Params.sitemap_exclude }}{{ continue }}{{ end }}
+  {{- if .Sitemap.Disable }}{{ continue }}{{ end }}
+  {{- $sections = $sections | append . }}
+{{- end }}
+{{- with $sections }}
+
+## Sections
+
+{{- range $sections }}
+  {{- with .OutputFormats.Get "html" }}
+- [{{ .Title }}]({{ .Permalink }}){{ with .Description }}: {{ . }}{{ end }}
+  {{- end }}
+{{- end }}
+{{- end }}
