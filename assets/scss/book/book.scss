@@ -3,13 +3,22 @@ $book-paper: #f4ecd9;
 $book-ink: #2c2620;
 $book-spine: #3a332b;
 
+// The viewer is the page: it covers the whole viewport like the
+// playground viewer, without any site chrome around it
 .book-reader {
   background: #221d18;
-  margin: 0 auto;
-  max-width: 75rem;
-  overflow: hidden;
-  padding: 2.5rem 0.5rem;
+  height: 100vh;
+  height: 100dvh;
+  margin: 0;
+  max-width: none;
+  padding: 0;
   position: relative;
+  width: 100vw;
+}
+
+// Continuous mode scrolls inside the viewport-sized host
+.book-reader .archive-scan-viewer {
+  height: 100%;
 }
 
 // The original (pre-effect) leaf content keeps the page look
@@ -24,14 +33,21 @@ $book-spine: #3a332b;
       rgb(58 51 43 / 0.2)
     ),
     $book-paper;
-  box-shadow: 0 0 1.5rem rgb(0 0 0 / 0.55);
   color: $book-ink;
   font-family: Lora, Georgia, "Times New Roman", serif;
   font-size: 1rem;
   line-height: 1.7;
-  margin: 0 auto;
-  max-width: 38rem;
+
+  // Never taller than the window while the content fits:
+  // subtract the copier frame bands (exposed by the page renderer)
+  min-height: calc(
+    100vh - var(--archive-frame-top, 0px) - var(--archive-frame-bottom, 0px)
+  );
+  min-height: calc(
+    100dvh - var(--archive-frame-top, 0px) - var(--archive-frame-bottom, 0px)
+  );
   padding: 4rem 3.5rem;
+  width: 100%;
 }
 
 .book-reader h1,
@@ -72,17 +88,10 @@ $book-spine: #3a332b;
   padding-left: 1em;
 }
 
-// Full-page mode: the reader covers the whole page
+// Full-page mode: the reader replaces the site chrome
 body.book-page {
   margin: 0;
   padding: 0;
-
-  .book-reader {
-    max-width: none;
-    min-height: 100vh;
-    padding: 1rem 0.5rem;
-    width: 100%;
-  }
 
   .main {
     margin: 0;

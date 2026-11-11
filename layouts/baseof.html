@@ -55,20 +55,25 @@
 
 {{- if $book }}
       </div>
+      <div class="book-leaf book-leaf-empty" id="book-leaf-empty" aria-hidden="true"></div>
     </div>
     <script type="text/javascript">
       window.addEventListener('DOMContentLoaded', (event) => {
         window.bookViewer('#book-{{ md5 .RelPermalink }}', {
-          pages: ['#book-leaf-0'],
-          preset: {{ .Params.preset | default "book-photo" | jsonify }},
-          seed: {{ .Params.seed | default "strandkorb-buch" | jsonify }},
+          pages: ['#book-leaf-0', '#book-leaf-empty'],
+          preset: {{ .Params.preset | default "book-photo" }},
+          seed: {{ .Params.seed | default "strandkorb-buch" }},
+          continuous: true,
+          overrides: {
+            border: { enabled: true }
+          },
           layouts: [
             {
               query: '(max-width: 767px)',
               mode: 'single',
               pageFit: 'width',
               gutter: false,
-              background: {{ .Params.viewerBackground | default "#221d18" | jsonify }}
+              background: {{ .Params.viewerBackground | default "#221d18" }}
             },
             {
               query: '(min-width: 768px)',
@@ -76,8 +81,7 @@
               pageFit: 'contain',
               gap: 0,
               gutter: 'deep-bound-volume',
-              background: {{ .Params.viewerBackground | default "#221d18" | jsonify }},
-              spread: { firstPageSide: 'right' }
+              background: {{ .Params.viewerBackground | default "#221d18" }}
             }
           ]
         });

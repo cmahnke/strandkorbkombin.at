@@ -24,16 +24,20 @@
       window.addEventListener('DOMContentLoaded', (event) => {
         var target = document.getElementById('{{ $id }}');
         window.bookViewer(target, {
-          pages: {{ $leaves | jsonify }},
-          preset: {{ $preset | jsonify }},
-          seed: {{ $seed | jsonify }},
+          pages: {{ $leaves }},
+          preset: {{ $preset }},
+          seed: {{ $seed }},
+          continuous: true,
+          overrides: {
+            border: { enabled: true }
+          },
           layouts: [
             {
               query: '(max-width: 767px)',
               mode: 'single',
               pageFit: 'width',
               gutter: false,
-              background: {{ $bg | jsonify }}
+              background: {{ $bg }}
             },
             {
               query: '(min-width: 768px)',
@@ -41,8 +45,7 @@
               pageFit: 'contain',
               gap: 0,
               gutter: 'deep-bound-volume',
-              background: {{ $bg | jsonify }},
-              spread: { firstPageSide: 'right' }
+              background: {{ $bg }}
             }
           ]
         });
