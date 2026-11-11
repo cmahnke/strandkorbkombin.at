@@ -6,6 +6,10 @@ on:
       - main
   workflow_dispatch:
 
+permissions:
+  contents: write
+  pages: write
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -13,6 +17,7 @@ concurrency:
 env:
   HUGO_VERSION: 0.169.0
   DEPENDENCY_MANAGER: npm
+  PYTHON_VERSION: '3.13'
 
 jobs:
   deploy:
