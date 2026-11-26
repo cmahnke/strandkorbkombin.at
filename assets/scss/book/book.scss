@@ -34,8 +34,11 @@ $book-spine: #3a332b;
     ),
     $book-paper;
   color: $book-ink;
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
   font-family: Lora, Georgia, "Times New Roman", serif;
-  font-size: 1rem;
+  font-size: 1.6rem;
   line-height: 1.7;
 
   // Never taller than the window while the content fits:
@@ -46,7 +49,12 @@ $book-spine: #3a332b;
   min-height: calc(
     100dvh - var(--archive-frame-top, 0px) - var(--archive-frame-bottom, 0px)
   );
-  padding: 4rem 3.5rem;
+
+  // Top padding is the original 4rem minus the running head's
+  // occupied height (1.2rem line + 0.6rem padding + 1px border
+  // + 0.7rem margin = ~2.6rem), so content below the head
+  // starts where it did before the head was added.
+  padding: 1.4rem 3.5rem 4rem;
   width: 100%;
 }
 
@@ -57,6 +65,7 @@ $book-spine: #3a332b;
   hyphens: auto;
   letter-spacing: 0.02em;
   margin-top: 0;
+  text-align: center;
 }
 
 // Wide first letter of the first paragraph
@@ -112,6 +121,27 @@ body.book-page {
   background: transparent;
   color: inherit;
   font-family: inherit;
+}
+
+.book-reader .book-leaf > .footer {
+  margin-top: auto;
+}
+
+// Small running head repeated at the top of every leaf.
+// Line-height is tightened vs. the leaf's 1.7 so the head's
+// block height is predictable: 1.2rem line + 0.6rem padding
+// + 1px border + 0.7rem margin ≈ 2.6rem — the leaf's top
+// padding above accounts for this.
+.book-reader .book-leaf .book-leaf-running-head {
+  border-bottom: 1px solid rgb(58 51 43 / 0.5);
+  font-family: "Futura Renner", Lora, Georgia, serif;
+  font-size: 1rem;
+  letter-spacing: 0.18em;
+  line-height: 1.2;
+  margin-bottom: 0.7rem;
+  padding-bottom: 0.6rem;
+  text-align: center;
+  text-transform: uppercase;
 }
 
 // The drop cap also applies when main wraps the content
