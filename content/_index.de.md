@@ -12,6 +12,8 @@ scss:
 
 # Das Strandkorb-Kombinat
 
+---
+
 ## Strandkorb-Effekt
 Psychologisches Phänomen, bei dem die Investitionen in initiale Anpassung bzw. Restaurierung eines Gegenstands den Neuanschaffungswert übersteigt. Damit wird dieser Prozess zum eigentlichen Ziel. Benannt nach dem Strandkorb, dessen Instandhaltung (Lackierung, Reparatur) oft mehr Aufwand benötigt, als sein materieller Wert rechtfertigen würde. Die Beschäftigung mit dem Objekt selbst stiftet Sinn; nicht nur das fertige Ergebnis zählt, sondern die (handwerkliche) Beschäftigung mit einem Gegenstand, der mit Strand, Sommer und Entspannung verbunden ist.
 

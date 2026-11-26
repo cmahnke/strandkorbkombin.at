@@ -1,0 +1,15 @@
+<div class="book-leaf-running-head"><span>{{ site.Title }}</span></div>
+{{ $parts := split (printf "%s" .Content) "<hr" }}
+{{ $titleHtml := index $parts 0 }}
+{{ $titleHtml | safeHTML }}
+{{- $subtitle := "" -}}
+{{- if .Description -}}
+  {{- $subtitle = .Description -}}
+{{- else if site.Params.description -}}
+  {{- $subtitle = site.Params.description -}}
+{{- else if .Summary -}}
+  {{- $subtitle = .Summary -}}
+{{- end -}}
+{{ with $subtitle }}
+<p class="book-title-subtitle">{{ . | markdownify }}</p>
+{{ end }}

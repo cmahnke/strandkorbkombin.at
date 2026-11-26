@@ -80,6 +80,18 @@ $book-spine: #3a332b;
   padding-top: 0.06em;
 }
 
+// The title leaf's subtitle is the first <p>, but it is a
+// centered title-page line, not body prose: no drop cap.
+.book-reader .book-leaf-title > p:first-of-type::first-letter {
+  color: inherit;
+  float: none;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  padding: 0;
+}
+
 .book-reader p {
   hyphens: auto;
   margin: 0 0 1.1em;
@@ -110,13 +122,6 @@ body.book-page {
 
 // Header and footer are part of the displayed page:
 // blend the site chrome into the paper tone
-.book-reader .book-leaf .site-header {
-  background: transparent;
-  color: inherit;
-  font-family: inherit;
-  position: static;
-}
-
 .book-reader .book-leaf .footer {
   background: transparent;
   color: inherit;
@@ -125,6 +130,17 @@ body.book-page {
 
 .book-reader .book-leaf > .footer {
   margin-top: auto;
+}
+
+// Inner content measure: 1rem left/right inset inside the leaf
+// box, so the scanned paper sheet (background, gradient, frame
+// compensation) stays untouched.
+.book-reader .book-leaf .book-leaf-body {
+  padding-inline: 1rem;
+
+  hr {
+    display: none;
+  }
 }
 
 // Small running head repeated at the top of every leaf.
@@ -154,4 +170,34 @@ body.book-page {
   line-height: 0.8;
   padding-right: 0.12em;
   padding-top: 0.06em;
+}
+
+// First leaf as a book title page: markdown h1 rendered as
+// the book title with a centered subtitle below it. Safe
+// centering centers when content fits and falls back to the
+// start when it overflows, so the top never clips. The
+// running head is hidden on this leaf; compensate with the
+// full original top padding (the leaf above normally uses
+// a reduced 1.4rem to account for the running head).
+.book-reader .book-leaf-title {
+  justify-content: safe center;
+  padding-top: 4rem;
+}
+
+.book-reader .book-leaf-title .book-leaf-running-head {
+  display: none;
+}
+
+.book-reader .book-leaf-title h1 {
+  font-size: 3.2rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.book-reader .book-leaf-title .book-title-subtitle {
+  font-family: "Futura Renner", Lora, Georgia, serif;
+  font-size: 2rem;
+  font-weight: 400;
+  margin-top: 1rem;
+  text-align: center;
 }

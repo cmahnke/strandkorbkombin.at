@@ -1,0 +1,10 @@
+<div class="book-leaf-running-head"><span>{{ site.Title }}</span></div>
+<div class="book-leaf-body">
+{{ $parts := split (printf "%s" .Content) "<hr" }}
+{{ $body := index $parts 1 }}
+{{ if gt (len $parts) 2 }}{{ $body = printf "%s<hr%s" $body (index $parts 2) }}{{ end }}
+{{ if $body }}
+{{ $body = printf "<hr%s" $body }}
+{{ $body | safeHTML }}
+{{ end }}
+</div>

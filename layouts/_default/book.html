@@ -12,11 +12,11 @@
     {{- $leaves := slice -}}
     <div class="book-reader" id="{{ $id }}">
       {{- range $i, $page := .Pages }}
-        <div class="book-leaf" id="book-leaf-{{ $i }}">{{- partial "book/running-head.html" $page -}}{{ $page.Content }}</div>
+        <div class="book-leaf{{ if eq $i 0 }} book-leaf-title{{ end }}" id="book-leaf-{{ $i }}">{{- partial "book/running-head.html" $page -}}{{ if eq $i 0 }}{{ $page.Content }}{{ else }}<div class="book-leaf-body">{{ $page.Content }}</div>{{ end }}</div>
         {{- $leaves = $leaves | append (printf "#book-leaf-%d" $i) -}}
       {{- end }}
       {{- if not $leaves }}
-        <div class="book-leaf" id="book-leaf-0">{{- partial "book/running-head.html" . -}}{{ .Content }}</div>
+        <div class="book-leaf book-leaf-title" id="book-leaf-0">{{- partial "book/running-head.html" . -}}{{ .Content }}</div>
         {{- $leaves = slice "#book-leaf-0" -}}
       {{- end }}
     </div>

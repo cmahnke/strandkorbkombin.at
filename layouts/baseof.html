@@ -30,10 +30,14 @@
 
 {{- if $book }}
     <div class="book-reader" id="book-{{ md5 .RelPermalink }}">
-      <div class="book-leaf" id="book-leaf-0">
-      {{- partial "book/running-head.html" . -}}
-{{- end }}
-
+      <div class="book-leaf book-leaf-title" id="book-leaf-0">
+        {{- partial "book/title-leaf.html" . -}}
+      </div>
+      <div class="book-leaf book-leaf-content" id="book-leaf-1">
+        {{- partial "book/content-leaf.html" . -}}
+        {{ partial "footer.html" . }}
+      </div>
+{{- else }}
     <header id="site-header" class="site-header">
       <div class='top-navigation'>
         {{ partial "topnavigation.html" . }}
@@ -43,26 +47,23 @@
         {{ partial "header.html" . }}
       </div>
     </header>
+{{- end }}
 
     <main id="main" class="main">
-
       {{ block "main" . }}
       {{ end }}
+      {{ if not $book }}
       {{ block "content" . }}
+      {{ end }}
       {{ end }}
     </main>
 
 {{- if $book }}
-      </div>
-      <div class="book-leaf book-leaf-empty" id="book-leaf-empty">
-        {{- partial "book/running-head.html" . -}}
-        {{ partial "footer.html" . }}
-      </div>
     </div>
     <script type="text/javascript">
       window.addEventListener('DOMContentLoaded', (event) => {
         window.bookViewer('#book-{{ md5 .RelPermalink }}', {
-          pages: ['#book-leaf-0', '#book-leaf-empty'],
+          pages: ['#book-leaf-0', '#book-leaf-1'],
           preset: {{ .Params.preset | default "book-photo" }},
           seed: {{ .Params.seed | default "strandkorb-buch" }},
           continuous: true,

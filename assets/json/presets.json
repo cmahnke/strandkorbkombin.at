@@ -5,16 +5,16 @@
   },
   "exposure": {
     "brightness": 1.02,
-    "contrast": 1.9,
+    "contrast": 2.1,
     "gamma": 0.9,
     "unevenness": 0.22,
     "blownHighlights": 0.34,
     "crushedShadows": 0.58
   },
   "ink": {
-    "spread": 0.28,
+    "spread": 0.04,
     "erosion": 0.09,
-    "blur": 0.025
+    "blur": 0.3
   },
   "tone": {
     "mode": "bitonal",
@@ -24,7 +24,7 @@
     "ditherAmount": 0.34
   },
   "artifacts": {
-    "grain": 0.58,
+    "grain": 0.84,
     "dust": 0.2,
     "scratches": 0.12,
     "bleedThrough": 0.025,
@@ -35,7 +35,7 @@
   },
   "capture": {
     "grayscale": true,
-    "rotation": 0,
+    "rotation": 0.6,
     "perspective": 0,
     "rotationJitter": 0
   },
